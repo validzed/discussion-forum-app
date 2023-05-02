@@ -20,6 +20,8 @@
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "max-len": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }
