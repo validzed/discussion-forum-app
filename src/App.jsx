@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import path from './utils/path';
+import { path } from './utils';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -63,6 +63,7 @@ function App() {
         <Routes>
           <Route path={path.HOME_PAGE} element={<HomePage />} />
           <Route path={path.ADD_THREAD_PAGE} element={<h1>Add Thread Page</h1>} />
+          <Route path={path.THREAD_DETAIL} element={<h1>Thread Detail</h1>} />
         </Routes>
       </main>
     </>

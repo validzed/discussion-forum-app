@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiPlus, FiMenu } from 'react-icons/fi';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import path from '../utils/path';
+import { path } from '../utils';
 import { asyncUnsetAuthUser } from '../states/authUser/action';
 
 function Navigation() {
