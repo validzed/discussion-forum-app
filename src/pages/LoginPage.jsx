@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import path from '../utils/path';
 import LoginInput from '../components/LoginInput';
 import { asyncSetAuthUser } from '../states/authUser/action';
 
@@ -29,7 +30,7 @@ function LoginPage() {
           Don&apos;t have an account?
           {' '}
           <Link
-            to="/register"
+            to={path.REGISTER_PAGE}
             className="font-medium text-blue-600 hover:underline dark:text-blue-500"
           >
             Register Now

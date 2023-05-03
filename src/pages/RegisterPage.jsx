@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import path from '../utils/path';
 import RegisterInput from '../components/RegisterInput';
 import { asyncRegisterUser } from '../states/users/action';
 
@@ -10,7 +11,7 @@ function RegisterPage() {
 
   const onRegister = async ({ name, email, password }) => {
     await dispatch(asyncRegisterUser({ name, email, password }));
-    navigate('/');
+    navigate(path.HOME_PAGE);
   };
 
   return (
@@ -31,7 +32,7 @@ function RegisterPage() {
           Already have an account?
           {' '}
           <Link
-            to="/"
+            to={path.LOGIN_PAGE}
             className="font-medium text-blue-600 hover:underline dark:text-blue-500"
           >
             Log in here
