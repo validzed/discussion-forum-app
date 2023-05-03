@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const firstRun = React.useRef(true);
@@ -45,12 +46,15 @@ function App() {
     return (
       <Routes>
         <Route path="/*" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     );
   }
 
   return (
-    <h1>HomePage</h1>
+    <Routes>
+      <Route path="/" element={<h1>HomePage</h1>} />
+    </Routes>
   );
 }
 
