@@ -11,3 +11,8 @@ h6 {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
 }
+
+[contenteditable=true]:empty:not(:focus):before{
+  content:attr(data-placeholder);
+  color:rgb(156 163 175 / 1);
+}

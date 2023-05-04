@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import Navigation from './components/Navigation';
 import AddPage from './pages/AddPage';
+import DetailPage from './pages/DetailPage';
 
 function App() {
   const firstRun = React.useRef(true);
@@ -64,7 +65,7 @@ function App() {
         <Routes>
           <Route path={path.HOME_PAGE} element={<HomePage />} />
           <Route path={path.ADD_THREAD_PAGE} element={<AddPage />} />
-          <Route path={path.THREAD_DETAIL} element={<h1>Thread Detail</h1>} />
+          <Route path={path.THREAD_DETAIL} element={<DetailPage />} />
         </Routes>
       </main>
     </>
