@@ -7,10 +7,9 @@ import NeutralizeThreadButton from './NeutralizeThreadButton';
 import UpvoteThreadButton from './UpvoteThreadButton';
 import ThreadCommentInput from './ThreadCommentInput';
 import ThreadCommentList from './ThreadCommentList';
-import ThreadCommentItem from './ThreadCommentItem';
 
 function ThreadDetail({
-  id, title, body, category, comments, upVotesBy, owner, createdAt, authUser,
+  id, title, body, category, comments, upVotesBy, owner, createdAt, authUser, addComment,
 }) {
   const isThreadVoted = upVotesBy.includes(authUser);
 
@@ -45,7 +44,7 @@ function ThreadDetail({
               <AiFillTag className="inline-block -rotate-90 text-gray-400 ml-1" />
             </button>
           </div>
-          <ThreadCommentInput />
+          <ThreadCommentInput addComment={addComment} />
         </div>
       </div>
       <ThreadCommentList comments={comments} authUser={authUser} />

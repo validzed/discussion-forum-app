@@ -3,6 +3,7 @@ import api from '../../utils/api';
 const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
   CLEAR_THREAD_DETAIL: 'CLEAR_THREAD_DETAIL',
+  ADD_COMMENT: 'ADD_COMMENT',
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -20,6 +21,15 @@ function clearThreadDetailActionCreator() {
   };
 }
 
+function addCommentActionCreator(comments) {
+  return {
+    type: ActionType.ADD_COMMENT,
+    payload: {
+      comments,
+    },
+  };
+}
+
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
     dispatch(clearThreadDetailActionCreator());
@@ -33,9 +43,10 @@ function asyncReceiveThreadDetail(threadId) {
 }
 
 function asyncAddComment(threadId, comment) {
-  return async () => {
+  return async (dispatch) => {
     try {
-      await api.createComment(threadId, comment);
+      const newComments = await api.createComment(threadId, comment);
+      dispatch(addCommentActionCreator(newComments));
     } catch (error) {
       alert(error.message);
     }

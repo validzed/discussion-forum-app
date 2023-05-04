@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function ThreadCommentInput() {
+function ThreadCommentInput({ addComment }) {
   const [comment, setComment] = useState('');
 
   return (
@@ -17,6 +18,7 @@ function ThreadCommentInput() {
       />
       <button
         type="button"
+        onClick={() => addComment(comment)}
         className="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold tracking-wide rounded-lg text-base px-4 py-2 text-center my-5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Post comment
@@ -24,5 +26,9 @@ function ThreadCommentInput() {
     </div>
   );
 }
+
+ThreadCommentInput.propTypes = {
+  addComment: PropTypes.func.isRequired,
+};
 
 export default ThreadCommentInput;
