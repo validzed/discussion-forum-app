@@ -1,8 +1,32 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+import { path } from './utils';
+import { asyncPreloadProcess } from './states/isPreload/action';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import HomePage from './pages/HomePage';
+import Navigation from './components/Navigation';
+import AddPage from './pages/AddPage';
+import DetailPage from './pages/DetailPage';
+import Loading from './components/Loading';
 
 function App() {
+  const firstRun = React.useRef(true);
   const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
+  const {
+    authUser = null,
+    isPreload = false,
+  } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (firstRun.current) {
+      dispatch(asyncPreloadProcess());
+      firstRun.current = false;
+    }
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (theme === 'dark') {
@@ -20,25 +44,36 @@ function App() {
     });
   };
 
+  if (isPreload) {
+    return null;
+  }
+
+  if (authUser === null) {
+    return (
+      <main>
+        <Loading />
+        <Routes>
+          <Route path={`${path.LOGIN_PAGE}*`} element={<LoginPage />} />
+          <Route path={path.REGISTER_PAGE} element={<RegisterPage />} />
+        </Routes>
+      </main>
+    );
+  }
+
   return (
-    <div className="dark:bg-slate-800 bg-white">
+    <>
+      <Loading />
       <header>
-        <img className="h-20 w-auto" src="./icons/logo.svg" alt="Logo" />
-        <p className="text-2xl dark:text-white">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button className="bg-sky-900 text-white mt-3" type="button" onClick={onChangeTheme}>
-          Change Theme
-        </button>
+        <Navigation authUser={authUser} />
       </header>
       <main>
-        <h2 className="mt-3 text-3xl text-slate-900 dark:text-slate-100">Title Discussion</h2>
-        <p className="text-xl font-light text-slate-900 dark:text-slate-100">
-          Tailwind CSS is a utility-first CSS framework for rapid UI development created by Adam
-          Wathan, Jonathan Reinink, David Hemphill and Steve Schoger.
-        </p>
+        <Routes>
+          <Route path={path.HOME_PAGE} element={<HomePage />} />
+          <Route path={path.ADD_THREAD_PAGE} element={<AddPage />} />
+          <Route path={path.THREAD_DETAIL} element={<DetailPage />} />
+        </Routes>
       </main>
-    </div>
+    </>
   );
 }
 
