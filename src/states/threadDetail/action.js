@@ -5,6 +5,8 @@ const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
   CLEAR_THREAD_DETAIL: 'CLEAR_THREAD_DETAIL',
   ADD_COMMENT: 'ADD_COMMENT',
+  UPVOTE_THREAD_DETAIL: 'UPVOTE_THREAD_DETAIL',
+  NEUTRALIZE_THREAD_DETAIL_VOTE: 'NEUTRALIZE_THREAD_DETAIL_VOTE',
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -27,6 +29,24 @@ function addCommentActionCreator(comments) {
     type: ActionType.ADD_COMMENT,
     payload: {
       comments,
+    },
+  };
+}
+
+function upvoteThreadDetailActionCreator({ userId }) {
+  return {
+    type: ActionType.UPVOTE_THREAD_DETAIL,
+    payload: {
+      userId,
+    },
+  };
+}
+
+function neutralizeThreadDetailVoteActionCreator({ userId }) {
+  return {
+    type: ActionType.NEUTRALIZE_THREAD_DETAIL_VOTE,
+    payload: {
+      userId,
     },
   };
 }
@@ -56,10 +76,38 @@ function asyncAddComment(threadId, comment) {
   };
 }
 
+function asyncUpvoteThreadDetail(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(upvoteThreadDetailActionCreator({ userId: authUser.id }));
+    try {
+      await api.upvoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+function asyncNeutralizeThreadDetailVote(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(neutralizeThreadDetailVoteActionCreator({ userId: authUser.id }));
+    try {
+      await api.neutralizeThreadVote(threadId);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
 export {
   ActionType,
   receiveThreadDetailActionCreator,
   clearThreadDetailActionCreator,
+  upvoteThreadDetailActionCreator,
+  neutralizeThreadDetailVoteActionCreator,
   asyncReceiveThreadDetail,
   asyncAddComment,
+  asyncUpvoteThreadDetail,
+  asyncNeutralizeThreadDetailVote,
 };

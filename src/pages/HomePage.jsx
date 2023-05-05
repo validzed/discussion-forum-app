@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action';
+import { asyncNeutralizeThreadVote, asyncUpvoteThread } from '../states/threads/action';
 import ThreadList from '../components/ThreadList';
 
 function HomePage() {
@@ -20,6 +21,14 @@ function HomePage() {
     }
   }, [dispatch]);
 
+  const onUpvoteThread = (threadId) => {
+    dispatch(asyncUpvoteThread(threadId));
+  };
+
+  const onNeutralizeThreadVote = (threadId) => {
+    dispatch(asyncNeutralizeThreadVote(threadId));
+  };
+
   const threadList = threads.map((thread) => ({
     ...thread,
     creator: users.find((user) => user.id === thread.ownerId),
@@ -28,7 +37,7 @@ function HomePage() {
 
   return (
     <section className="w-full h-screen bg-white  dark:bg-gray-900">
-      <ThreadList threads={threadList} />
+      <ThreadList threads={threadList} upvote={onUpvoteThread} neutralVote={onNeutralizeThreadVote} />
     </section>
   );
 }

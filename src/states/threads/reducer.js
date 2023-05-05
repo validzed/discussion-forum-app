@@ -11,9 +11,7 @@ function threadsReducer(threads = [], action = {}) {
         if (thread.id === action.payload.threadId) {
           return {
             ...thread,
-            upVotesBy: thread.upVotesBy.includes(action.payload.userId)
-              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
-              : thread.upVotesBy.concat([action.payload.userId]),
+            upVotesBy: thread.upVotesBy.concat([action.payload.userId]),
           };
         }
         return thread;
@@ -23,9 +21,7 @@ function threadsReducer(threads = [], action = {}) {
         if (thread.id === action.payload.threadId) {
           return {
             ...thread,
-            upVotesBy: thread.upVotesBy.includes(action.payload.userId)
-              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
-              : thread.upVotesBy.concat([action.payload.userId]),
+            upVotesBy: thread.upVotesBy.filter((id) => id !== action.payload.userId),
           };
         }
         return thread;

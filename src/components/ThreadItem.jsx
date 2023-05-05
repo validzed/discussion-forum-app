@@ -8,7 +8,7 @@ import UpvoteThreadButton from './UpvoteThreadButton';
 import NeutralizeThreadButton from './NeutralizeThreadButton';
 
 function ThreadItem({
-  id, title, body, createdAt, upVotesBy, totalComments, category, creator, authUser,
+  id, title, body, createdAt, upVotesBy, totalComments, category, creator, authUser, upvote, neutralVote,
 }) {
   const isThreadVoted = upVotesBy.includes(authUser);
 
@@ -28,7 +28,7 @@ function ThreadItem({
         </div>
         <div className="flex gap-3.5 flex-wrap mt-4 justify-between">
           <div className="flex gap-2 sm:gap-3 items-center">
-            {isThreadVoted ? <UpvoteThreadButton /> : <NeutralizeThreadButton />}
+            {isThreadVoted ? <UpvoteThreadButton onClick={neutralVote} onClickArgumen={id} /> : <NeutralizeThreadButton onClick={upvote} onClickArgumen={id} />}
             <p className="text-xs sm:text-base font-bold text-gray-600 dark:text-gray-300 mr-3">
               {upVotesBy.length > 1 ? `${upVotesBy.length} likes` : `${upVotesBy.length} like`}
             </p>
@@ -69,6 +69,8 @@ const threadItemShape = {
 
 ThreadItem.propTypes = {
   ...threadItemShape,
+  upvote: PropTypes.func.isRequired,
+  neutralVote: PropTypes.func.isRequired,
 };
 
 export { threadItemShape };

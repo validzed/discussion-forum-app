@@ -9,7 +9,7 @@ import ThreadCommentInput from './ThreadCommentInput';
 import ThreadCommentList from './ThreadCommentList';
 
 function ThreadDetail({
-  id, title, body, category, comments, upVotesBy, owner, createdAt, authUser, addComment,
+  id, title, body, category, comments, upVotesBy, owner, createdAt, authUser, addComment, upvote, neutralVote,
 }) {
   const isThreadVoted = upVotesBy.includes(authUser);
 
@@ -28,7 +28,7 @@ function ThreadDetail({
           <div className="text-base sm:text-lg mt-4 text-gray-700 dark:text-slate-200">{parser(body)}</div>
           <div className="flex gap-3.5 flex-wrap mt-6 justify-between">
             <div className="flex gap-2 sm:gap-3 items-center">
-              {isThreadVoted ? <UpvoteThreadButton /> : <NeutralizeThreadButton />}
+              {isThreadVoted ? <UpvoteThreadButton onClick={neutralVote} onClickArgumen={id} /> : <NeutralizeThreadButton onClick={upvote} onClickArgumen={id} />}
               <p className="text-xs sm:text-base font-bold text-gray-600 dark:text-gray-300 mr-3">
                 {upVotesBy.length > 1 ? `${upVotesBy.length} likes` : `${upVotesBy.length} like`}
               </p>
@@ -72,6 +72,8 @@ const threadItemShape = {
 
 ThreadDetail.propTypes = {
   ...threadItemShape,
+  upvote: PropTypes.func.isRequired,
+  neutralVote: PropTypes.func.isRequired,
 };
 
 export default ThreadDetail;
