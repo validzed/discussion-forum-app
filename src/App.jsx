@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import Navigation from './components/Navigation';
 import AddPage from './pages/AddPage';
 import DetailPage from './pages/DetailPage';
+import Loading from './components/Loading';
 
 function App() {
   const firstRun = React.useRef(true);
@@ -49,15 +50,19 @@ function App() {
 
   if (authUser === null) {
     return (
-      <Routes>
-        <Route path={`${path.LOGIN_PAGE}*`} element={<LoginPage />} />
-        <Route path={path.REGISTER_PAGE} element={<RegisterPage />} />
-      </Routes>
+      <main>
+        <Loading />
+        <Routes>
+          <Route path={`${path.LOGIN_PAGE}*`} element={<LoginPage />} />
+          <Route path={path.REGISTER_PAGE} element={<RegisterPage />} />
+        </Routes>
+      </main>
     );
   }
 
   return (
     <>
+      <Loading />
       <header>
         <Navigation authUser={authUser} />
       </header>

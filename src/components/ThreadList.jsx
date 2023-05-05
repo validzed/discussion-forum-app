@@ -7,7 +7,7 @@ function ThreadList({ threads }) {
   return (
     <div
       id="thread-list-wrapper"
-      className="dark:bg-gray-900 max-w-3xl mx-auto pt-20 p-4 divide-y"
+      className="dark:bg-gray-900 max-w-3xl mx-auto pt-16 p-4 divide-y"
     >
       {threads.map((thread) => (
         <ThreadItem key={thread.id} {...thread} />
