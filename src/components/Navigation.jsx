@@ -1,16 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiPlus, FiMenu } from 'react-icons/fi';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { path } from '../utils';
 import { asyncUnsetAuthUser } from '../states/authUser/action';
 
-function Navigation() {
+function Navigation({ toggleTheme, theme }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
+    navigate(path.LOGIN_PAGE);
   };
 
   return (
@@ -60,9 +63,10 @@ function Navigation() {
           </Link>
           <button
             type="button"
+            onClick={toggleTheme}
             className="mx-2 sm:mr-6 text-xl sm:text-2xl dark:text-slate-100"
           >
-            <FaSun />
+            {theme === 'light' ? <FaMoon /> : <FaSun /> }
           </button>
           <button
             data-collapse-toggle="navbar-sticky"
@@ -80,5 +84,10 @@ function Navigation() {
     </nav>
   );
 }
+
+Navigation.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+};
 
 export default Navigation;

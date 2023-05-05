@@ -64,7 +64,7 @@ function App() {
     <>
       <Loading />
       <header>
-        <Navigation authUser={authUser} />
+        <Navigation authUser={authUser} toggleTheme={onChangeTheme} theme={theme} />
       </header>
       <main>
         <Routes>
