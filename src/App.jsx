@@ -13,7 +13,6 @@ import Loading from './components/Loading';
 
 function App() {
   const firstRun = React.useRef(true);
-  const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
   const {
     authUser = null,
     isPreload = false,
@@ -27,22 +26,6 @@ function App() {
       firstRun.current = false;
     }
   }, [dispatch]);
-
-  React.useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-
-  const onChangeTheme = () => {
-    setTheme((prevTheme) => {
-      const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', newTheme);
-      return newTheme;
-    });
-  };
 
   if (isPreload) {
     return null;
@@ -64,7 +47,7 @@ function App() {
     <>
       <Loading />
       <header>
-        <Navigation authUser={authUser} toggleTheme={onChangeTheme} theme={theme} />
+        <Navigation authUser={authUser} />
       </header>
       <main>
         <Routes>

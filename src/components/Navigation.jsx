@@ -1,13 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiPlus, FiMenu } from 'react-icons/fi';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { path } from '../utils';
 import { asyncUnsetAuthUser } from '../states/authUser/action';
+import useTheme from '../hooks/useTheme';
 
-function Navigation({ toggleTheme, theme }) {
+function Navigation() {
+  const { theme, handleToggleTheme } = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,7 +64,7 @@ function Navigation({ toggleTheme, theme }) {
           </Link>
           <button
             type="button"
-            onClick={toggleTheme}
+            onClick={handleToggleTheme}
             className="mx-2 sm:mr-6 text-xl sm:text-2xl dark:text-slate-100"
           >
             {theme === 'light' ? <FaMoon /> : <FaSun /> }
@@ -84,10 +85,5 @@ function Navigation({ toggleTheme, theme }) {
     </nav>
   );
 }
-
-Navigation.propTypes = {
-  toggleTheme: PropTypes.func.isRequired,
-  theme: PropTypes.string.isRequired,
-};
 
 export default Navigation;
