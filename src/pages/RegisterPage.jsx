@@ -15,7 +15,7 @@ function RegisterPage() {
   };
 
   return (
-    <section className="container grid gap-12 mx-auto md:grid-cols-2 lg:gap-0 dark:bg-slate-800">
+    <section className="container grid gap-12 mx-auto md:grid-cols-2 lg:gap-0 dark:bg-gray-900">
       <div className="w-96 mx-auto mt-16 mb-8 px-8 sm:px-0">
         <img src="./icons/logo.svg" alt="logo app" />
         <h1 className="mt-5 mb-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-slate-100">
