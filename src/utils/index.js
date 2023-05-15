@@ -3,7 +3,7 @@ const path = {
   REGISTER_PAGE: '/register',
   HOME_PAGE: '/',
   ADD_THREAD_PAGE: '/add-thread',
-  THREAD_DETAIL: '/threads/:id',
+  THREAD_DETAIL: '/threads/:threadId',
 };
 
 function postedAt(date) {
